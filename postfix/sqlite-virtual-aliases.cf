@@ -1,0 +1,6 @@
+# Postfix SQLite configuration for virtual aliases
+# Query the aliases table to resolve alias to destination user
+# Returns destination email address
+
+dbpath = /app/data/mails.db
+query = SELECT dest_u.username || '@' || dest_d.domain FROM aliases a INNER JOIN users dest_u ON a.destination_user_id = dest_u.id INNER JOIN domains dest_d ON dest_u.domain_id = dest_d.id INNER JOIN domains alias_d ON a.domain_id = alias_d.id WHERE a.alias || '@' || alias_d.domain = '%s' AND a.enabled=1

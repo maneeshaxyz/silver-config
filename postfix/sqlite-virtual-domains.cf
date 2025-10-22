@@ -1,0 +1,5 @@
+# Postfix SQLite configuration for virtual domains
+# Query the domains table
+
+dbpath = /app/data/mails.db
+query = SELECT domain FROM domains WHERE domain='%s' AND enabled=1
