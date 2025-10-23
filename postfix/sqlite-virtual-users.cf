@@ -1,6 +1,6 @@
 # Postfix SQLite configuration for virtual mailbox users
 # Query the users table joined with domains table
-# Returns maildir path in format: domain.com/username/
+# Returns 1 if user exists and is enabled (mail delivery handled by Raven IMAP)
 
 dbpath = /app/data/mails.db
-query = SELECT d.domain || '/' || u.username || '/' FROM users u INNER JOIN domains d ON u.domain_id = d.id WHERE u.username || '@' || d.domain = '%s' AND u.enabled=1 AND d.enabled=1
+query = SELECT 1 FROM users u INNER JOIN domains d ON u.domain_id = d.id WHERE u.username || '@' || d.domain = '%s' AND u.enabled=1 AND d.enabled=1
