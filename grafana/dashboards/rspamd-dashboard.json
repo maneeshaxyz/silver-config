@@ -17,7 +17,7 @@
   },
   "editable": true,
   "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "id": null,
   "links": [],
   "panels": [
@@ -36,7 +36,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "blue",
                 "value": null
               }
             ]
@@ -46,8 +46,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 6,
+        "h": 5,
+        "w": 5,
         "x": 0,
         "y": 0
       },
@@ -75,11 +75,11 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_scanned_total[5m])) * 300",
+          "expr": "rspamd_scanned_total",
           "refId": "A"
         }
       ],
-      "title": "Messages Scanned (5m)",
+      "title": "Total Scanned",
       "type": "stat"
     },
     {
@@ -97,16 +97,16 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
+                "color": "red",
                 "value": null
               },
               {
                 "color": "yellow",
-                "value": 10
+                "value": 1
               },
               {
                 "color": "red",
-                "value": 50
+                "value": 10
               }
             ]
           },
@@ -115,9 +115,9 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
+        "h": 5,
+        "w": 5,
+        "x": 5,
         "y": 0
       },
       "id": 2,
@@ -144,82 +144,12 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_spam_total[5m])) * 300",
+          "expr": "rspamd_spam_total",
           "refId": "A"
         }
       ],
-      "title": "Spam Detected (5m)",
+      "title": "Spam Detected",
       "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 100,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "yellow",
-                "value": 5
-              },
-              {
-                "color": "red",
-                "value": 20
-              }
-            ]
-          },
-          "unit": "percent"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 3,
-      "options": {
-        "minVizHeight": 75,
-        "minVizWidth": 75,
-        "orientation": "auto",
-        "reduceOptions": {
-          "values": false,
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": ""
-        },
-        "showThresholdLabels": false,
-        "showThresholdMarkers": true,
-        "sizing": "auto"
-      },
-      "pluginVersion": "11.0.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "100 * sum(rate(rspamd_spam_total[5m])) / sum(rate(rspamd_scanned_total[5m]))",
-          "refId": "A"
-        }
-      ],
-      "title": "Spam Rate (%)",
-      "type": "gauge"
     },
     {
       "datasource": {
@@ -246,9 +176,70 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 18,
+        "h": 5,
+        "w": 5,
+        "x": 10,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rspamd_ham_total",
+          "refId": "A"
+        }
+      ],
+      "title": "Ham (Legitimate)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 15,
         "y": 0
       },
       "id": 4,
@@ -275,11 +266,80 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_ham_total[5m])) * 300",
+          "expr": "rspamd_learned_total",
           "refId": "A"
         }
       ],
-      "title": "Ham (Legitimate) Messages (5m)",
+      "title": "Learned",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 100
+              },
+              {
+                "color": "red",
+                "value": 500
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rspamd_scan_time_average * 1000",
+          "refId": "A"
+        }
+      ],
+      "title": "Avg Scan Time",
       "type": "stat"
     },
     {
@@ -385,17 +445,18 @@
         ]
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
-        "y": 4
+        "y": 5
       },
-      "id": 5,
+      "id": 6,
       "options": {
         "legend": {
           "calcs": [
             "mean",
-            "max"
+            "max",
+            "last"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -403,7 +464,7 @@
         },
         "tooltip": {
           "maxHeight": 600,
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -413,7 +474,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_scanned_total[1m])) * 60",
+          "expr": "rate(rspamd_scanned_total[1m]) * 60",
           "legendFormat": "Total",
           "refId": "A"
         },
@@ -422,7 +483,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_spam_total[1m])) * 60",
+          "expr": "rate(rspamd_spam_total[1m]) * 60",
           "legendFormat": "Spam",
           "refId": "B"
         },
@@ -431,12 +492,12 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_ham_total[1m])) * 60",
+          "expr": "rate(rspamd_ham_total[1m]) * 60",
           "legendFormat": "Ham",
           "refId": "C"
         }
       ],
-      "title": "Message Processing Rate",
+      "title": "Message Processing Rate (per minute)",
       "type": "timeseries"
     },
     {
@@ -496,17 +557,18 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
-        "y": 4
+        "y": 5
       },
-      "id": 6,
+      "id": 7,
       "options": {
         "legend": {
           "calcs": [
             "mean",
-            "max"
+            "max",
+            "last"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -524,30 +586,12 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "histogram_quantile(0.50, sum(rate(rspamd_scan_time_bucket[5m])) by (le)) * 1000",
-          "legendFormat": "p50",
+          "expr": "rspamd_scan_time_average * 1000",
+          "legendFormat": "Average Scan Time",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "histogram_quantile(0.95, sum(rate(rspamd_scan_time_bucket[5m])) by (le)) * 1000",
-          "legendFormat": "p95",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "histogram_quantile(0.99, sum(rate(rspamd_scan_time_bucket[5m])) by (le)) * 1000",
-          "legendFormat": "p99",
-          "refId": "C"
         }
       ],
-      "title": "Message Scan Time (ms)",
+      "title": "Message Scan Time (milliseconds)",
       "type": "timeseries"
     },
     {
@@ -569,15 +613,46 @@
           },
           "mappings": []
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Spam"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Ham"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
         "w": 8,
         "x": 0,
-        "y": 12
+        "y": 14
       },
-      "id": 7,
+      "id": 8,
       "options": {
         "legend": {
           "displayMode": "table",
@@ -601,7 +676,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_spam_total[5m]))",
+          "expr": "rspamd_spam_total",
           "legendFormat": "Spam",
           "refId": "A"
         },
@@ -610,7 +685,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_ham_total[5m]))",
+          "expr": "rspamd_ham_total",
           "legendFormat": "Ham",
           "refId": "B"
         }
@@ -634,16 +709,27 @@
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
-            "fillOpacity": 80,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
               "tooltip": false,
               "viz": false,
               "legend": false
             },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
             "lineWidth": 1,
+            "pointSize": 5,
             "scaleDistribution": {
               "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
             },
             "thresholdsStyle": {
               "mode": "off"
@@ -665,13 +751,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Pass"
+              "options": "BAYES_SPAM"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "green",
+                  "fixedColor": "red",
                   "mode": "fixed"
                 }
               }
@@ -680,13 +766,13 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "Fail"
+              "options": "BAYES_HAM"
             },
             "properties": [
               {
                 "id": "color",
                 "value": {
-                  "fixedColor": "red",
+                  "fixedColor": "green",
                   "mode": "fixed"
                 }
               }
@@ -698,30 +784,24 @@
         "h": 8,
         "w": 8,
         "x": 8,
-        "y": 12
+        "y": 14
       },
-      "id": 8,
+      "id": 9,
       "options": {
-        "barRadius": 0,
-        "barWidth": 0.97,
-        "fullHighlight": false,
-        "groupWidth": 0.7,
         "legend": {
-          "calcs": [],
-          "displayMode": "list",
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "table",
           "placement": "bottom",
           "showLegend": true
         },
-        "orientation": "auto",
-        "showValue": "auto",
-        "stacking": "none",
         "tooltip": {
           "maxHeight": 600,
-          "mode": "single",
+          "mode": "multi",
           "sort": "none"
-        },
-        "xTickLabelRotation": 0,
-        "xTickLabelSpacing": 0
+        }
       },
       "targets": [
         {
@@ -729,58 +809,13 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_dkim_pass[5m])) * 300",
-          "legendFormat": "DKIM Pass",
+          "expr": "rspamd_statfiles_used",
+          "legendFormat": "{{symbol}}",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum(rate(rspamd_dkim_fail[5m])) * 300",
-          "legendFormat": "DKIM Fail",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum(rate(rspamd_spf_pass[5m])) * 300",
-          "legendFormat": "SPF Pass",
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum(rate(rspamd_spf_fail[5m])) * 300",
-          "legendFormat": "SPF Fail",
-          "refId": "D"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum(rate(rspamd_dmarc_pass[5m])) * 300",
-          "legendFormat": "DMARC Pass",
-          "refId": "E"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum(rate(rspamd_dmarc_fail[5m])) * 300",
-          "legendFormat": "DMARC Fail",
-          "refId": "F"
         }
       ],
-      "title": "DKIM / SPF / DMARC Statistics",
-      "type": "barchart"
+      "title": "Bayesian Filter - Tokens Used",
+      "type": "timeseries"
     },
     {
       "datasource": {
@@ -799,6 +834,14 @@
               {
                 "color": "green",
                 "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 1000
+              },
+              {
+                "color": "red",
+                "value": 10000
               }
             ]
           },
@@ -810,9 +853,9 @@
         "h": 8,
         "w": 8,
         "x": 16,
-        "y": 12
+        "y": 14
       },
-      "id": 9,
+      "id": 10,
       "options": {
         "displayMode": "gradient",
         "maxVizHeight": 300,
@@ -838,12 +881,12 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum by (action) (rate(rspamd_actions_total[5m])) * 300",
-          "legendFormat": "{{action}}",
+          "expr": "rspamd_statfiles_totals",
+          "legendFormat": "{{symbol}}",
           "refId": "A"
         }
       ],
-      "title": "Actions Taken (Reject/Greylist/Add Header)",
+      "title": "Bayesian Filter - Total Tokens",
       "type": "bargauge"
     },
     {
@@ -898,7 +941,7 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "decbytes"
         },
         "overrides": []
       },
@@ -906,14 +949,15 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 20
+        "y": 22
       },
-      "id": 10,
+      "id": 11,
       "options": {
         "legend": {
           "calcs": [
             "mean",
-            "max"
+            "max",
+            "last"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -931,21 +975,12 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_bayes_spam_learned[5m])) * 300",
-          "legendFormat": "Spam Learned",
+          "expr": "rspamd_allocated_bytes",
+          "legendFormat": "Allocated Bytes",
           "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "prometheus"
-          },
-          "expr": "sum(rate(rspamd_bayes_ham_learned[5m])) * 300",
-          "legendFormat": "Ham Learned",
-          "refId": "B"
         }
       ],
-      "title": "Bayesian Filter Learning Rate",
+      "title": "Rspamd Memory Usage",
       "type": "timeseries"
     },
     {
@@ -1008,14 +1043,13 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 20
+        "y": 22
       },
-      "id": 11,
+      "id": 12,
       "options": {
         "legend": {
           "calcs": [
-            "mean",
-            "max"
+            "last"
           ],
           "displayMode": "table",
           "placement": "bottom",
@@ -1033,8 +1067,8 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_greylisted[5m])) * 300",
-          "legendFormat": "Greylisted",
+          "expr": "rspamd_pools_allocated",
+          "legendFormat": "Pools Allocated",
           "refId": "A"
         },
         {
@@ -1042,8 +1076,8 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_whitelisted[5m])) * 300",
-          "legendFormat": "Whitelisted",
+          "expr": "rspamd_pools_freed",
+          "legendFormat": "Pools Freed",
           "refId": "B"
         },
         {
@@ -1051,13 +1085,262 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "sum(rate(rspamd_blacklisted[5m])) * 300",
-          "legendFormat": "Blacklisted",
+          "expr": "rspamd_chunks_allocated",
+          "legendFormat": "Chunks Allocated",
           "refId": "C"
         }
       ],
-      "title": "Greylist / Whitelist / Blacklist Activity",
+      "title": "Rspamd Memory Pools Activity",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 30
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rspamd_connections",
+          "refId": "A"
+        }
+      ],
+      "title": "Active Connections",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 30
+      },
+      "id": 14,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rspamd_control_connections_total",
+          "refId": "A"
+        }
+      ],
+      "title": "Control Connections",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 30
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rspamd_fuzzy_stat",
+          "legendFormat": "{{storage}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Fuzzy Hash Database",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 30
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "values": false,
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": ""
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "value_and_name",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "rspamd_build_info",
+          "legendFormat": "v{{version}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Rspamd Version",
+      "type": "stat"
     }
   ],
   "refresh": "30s",
@@ -1079,6 +1362,6 @@
   "timezone": "browser",
   "title": "Rspamd Mail Security Dashboard",
   "uid": "rspamd-dashboard",
-  "version": 1,
+  "version": 3,
   "weekStart": ""
 }
