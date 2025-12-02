@@ -44,3 +44,9 @@ scrape_configs:
     static_configs:
       - targets: ["postfix-exporter:9154"]
     metrics_path: '/metrics'
+
+  - job_name: node
+    # Scrape system metrics from Node Exporter
+    static_configs:
+      - targets: ["node-exporter:9100"]
+    metrics_path: '/metrics'
