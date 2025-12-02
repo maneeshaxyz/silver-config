@@ -39,6 +39,12 @@ scrape_configs:
       - targets: ["cadvisor:8080"]
     metrics_path: '/metrics'
 
+  - job_name: clamav
+    # Scrape ClamAV antivirus metrics
+    static_configs:
+      - targets: ["clamav-exporter:9810"]
+    metrics_path: '/metrics'
+
   - job_name: rspamd
     # Scrape Rspamd anti-spam metrics
     static_configs:
