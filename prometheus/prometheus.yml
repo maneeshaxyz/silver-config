@@ -33,6 +33,12 @@ scrape_configs:
     static_configs:
       - targets: ["host.docker.internal:9323"]
 
+  - job_name: cadvisor
+    # Scrape container metrics from cAdvisor
+    static_configs:
+      - targets: ["cadvisor:8080"]
+    metrics_path: '/metrics'
+
   - job_name: rspamd
     # Scrape Rspamd anti-spam metrics
     static_configs:
