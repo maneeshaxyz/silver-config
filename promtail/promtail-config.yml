@@ -15,4 +15,45 @@ scrape_configs:
           - localhost
         labels:
           job: varlogs
+          service_name: varlogs
           __path__: /var/log/*log
+
+  - job_name: postfix
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          service_name: varlogs
+          log_type: postfix
+          __path__: /mnt/logs/postfix/**/*.log
+
+  - job_name: rspamd
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          service_name: varlogs
+          log_type: rspamd
+          __path__: /mnt/logs/rspamd/**/*.log
+
+  - job_name: clamav
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          service_name: varlogs
+          log_type: clamav
+          __path__: /mnt/logs/clamav/**/*.log
+
+  - job_name: mail
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: varlogs
+          service_name: varlogs
+          log_type: mail
+          __path__: /var/log/mail.*
