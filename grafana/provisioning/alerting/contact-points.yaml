@@ -1,0 +1,10 @@
+apiVersion: 1
+contactPoints:
+  - orgId: 1
+    name: googlechat-contact-point
+    receivers:
+      - uid: ff7jnfrpu8ohsd
+        type: googlechat
+        settings:
+          url: ${GOOGLE_CHAT_WEBHOOK_URL}
+        disableResolveMessage: false
