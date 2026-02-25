@@ -52,9 +52,9 @@ gate_client:
 
 cors:
   allowed_origins:
-    - "https://<domain_name>:<port>"
+    - "https://<domain_name>:8090"
 
 passkey:
   allowed_origins:
-    - "https://<domain_name>:<port>"
+    - "https://<domain_name>:8090"
 
