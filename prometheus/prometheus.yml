@@ -47,7 +47,7 @@ scrape_configs:
   # Rspamd Metrics
   - job_name: "rspamd"
     static_configs:
-      - targets: ["rspamd-server:11334"]
+      - targets: ["rspamd-server:11332"]
         labels:
           instance: "mail-server"
           service: "rspamd"
