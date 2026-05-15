@@ -61,3 +61,10 @@ blob_storage:
   access_key: "your-access-key"
   secret_key: "your-secret-key"
   timeout: 30  # seconds
+
+# Socket map configuration for user lookups
+socketmap:
+  enabled: true
+  network: "tcp"
+  address: "raven:9100"
+  timeout_seconds: 2
