@@ -60,7 +60,7 @@ passkey:
 
 email:
   smtp:
-    host: "smtp.example.com"
+    host: "mail.example.com"
     port: 587
     username: "yourUsername"
     password: "yourPassword"
