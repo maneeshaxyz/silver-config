@@ -58,3 +58,12 @@ passkey:
   allowed_origins:
     - "https://<domain_name>:8090"
 
+email:
+  smtp:
+    host: "smtp.example.com"
+    port: 587
+    username: "yourUsername"
+    password: "yourPassword"
+    from_address: "yourEmail"
+    enable_start_tls: true
+    enable_authentication: true
