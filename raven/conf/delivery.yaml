@@ -66,5 +66,5 @@ blob_storage:
 socketmap:
   enabled: true
   network: "tcp"
-  address: "raven:9100"
+  address: "raven-server:9100"
   timeout_seconds: 2
