@@ -141,4 +141,4 @@ submission inet  n       -       y       -       -       smtpd
     -o smtpd_sasl_auth_enable=yes
     -o smtpd_tls_auth_only=yes
     -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
-    -o smtpd_milters=inet:rspamd-server:11332,inet:opendkim-server:8891
+    -o smtpd_milters=inet:rspamd:11332,inet:opendkim:8891
