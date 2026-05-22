@@ -1088,7 +1088,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "container_memory_usage_bytes{name=\"clamav-server\"} / 1024 / 1024",
+          "expr": "container_memory_usage_bytes{name=\"clamav\"} / 1024 / 1024",
           "legendFormat": "Memory Usage (MB)",
           "refId": "A"
         },
@@ -1097,7 +1097,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "container_spec_memory_limit_bytes{name=\"clamav-server\"} / 1024 / 1024",
+          "expr": "container_spec_memory_limit_bytes{name=\"clamav\"} / 1024 / 1024",
           "legendFormat": "Memory Limit (MB)",
           "refId": "B"
         }
@@ -1191,7 +1191,7 @@
             "type": "prometheus",
             "uid": "prometheus"
           },
-          "expr": "rate(container_cpu_usage_seconds_total{name=\"clamav-server\"}[5m]) * 100",
+          "expr": "rate(container_cpu_usage_seconds_total{name=\"clamav\"}[5m]) * 100",
           "legendFormat": "CPU Usage %",
           "refId": "A"
         }

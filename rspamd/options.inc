@@ -1,5 +1,5 @@
 dns {
-  nameserver = ["unbound-server"];
+  nameserver = ["unbound"];
   timeout = 1s;
   sockets = 16;
 }

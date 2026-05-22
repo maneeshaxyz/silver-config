@@ -23,7 +23,7 @@ scrape_configs:
   # cAdvisor (Docker container metrics)
   - job_name: "cadvisor"
     static_configs:
-      - targets: ["cadvisor-server:8080"]
+      - targets: ["cadvisor:8080"]
         labels:
           instance: "mail-server"
           service: "cadvisor"

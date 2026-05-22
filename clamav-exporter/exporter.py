@@ -23,7 +23,7 @@ CLAMAV_SOCKET_PATHS = [
     '/tmp/clamd.socket'
 ]
 # TCP connection as fallback
-CLAMAV_TCP_HOST = 'clamav-server'
+CLAMAV_TCP_HOST = 'clamav'
 CLAMAV_TCP_PORT = 3310
 EXPORTER_PORT = 9810
 
